@@ -1,0 +1,152 @@
+@import '../../node_modules/@fortawesome/fontawesome-svg-core/styles.css';
+
+:host, body {
+  --color-primary: #044389;
+  --color-gray: rgb(238, 240, 242);
+  --color-dark-bg: #333;
+  
+  --color-good: #218524;
+  --color-warning: #b67412;
+  --color-bad: #962626;
+  
+  --color-password: #2d5ba6;
+  --color-phishing: #8c0a7f;
+  --color-fake-news: #277d69;
+  --color-scamming: #a64e2c;
+  --color-external-link: #2d5ba6;
+  --color-malware: #a6302c;
+  --color-spam: #702da6;
+
+  --popup-navbar-height: 50px; /* nav height + main height can not be more than 600px (firefox rule) */
+  --popup-main-max-height: calc(600px - var(--popup-navbar-height));
+
+  all: initial;
+  box-sizing: border-box;
+  display: block;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Nunito', Verdana, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-password { background: var(--color-password) !important; }
+.bg-phishing { background: var(--color-phishing) !important; }
+.bg-fake-news { background: var(--color-fake-news) !important; }
+.bg-scamming { background: var(--color-scamming) !important; }
+.bg-external-link { background: var(--color-external-link) !important; }
+.bg-malware { background: var(--color-malware) !important; }
+.bg-spam { background: var(--color-spam) !important; }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4 {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 1.4em;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+h3 {
+  font-size: 1.12em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+label {
+  display: block;
+}
+
+.space-above {
+  margin-top: 1em;
+}
+
+.float-right {
+  float: right;
+}
+
+input[type=text],
+input[type=url],
+input[type=tel],
+input[type=number],
+input[type=color],
+input[type=email],
+input[type=password] {
+  font-size: 1em;
+  font-family: inherit;
+  line-height: 1;
+  height: 2em;
+  padding: 0.25em 0.5em;
+  background-color: white;
+  color: black;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 8px;
+  display: block;
+  width: 100%;
+}
+
+input[type=checkbox], input[type=radio] {
+  vertical-align: middle; 
+  position: relative;
+  bottom: .08em;
+}
+
+button {
+  font-size: 1em;
+  font-family: inherit;
+  background: none;
+  color: inherit;
+  padding: 0.8em 0.6em;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 8px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+
+  &.btn-primary {
+    border: none;
+    color: white;
+    background: var(--color-primary);
+  }
+
+  &.btn-secondary {
+    border: none;
+  }
+
+  &.btn-sm {
+    font-size: 0.9em;
+    padding: 0.45em 0.4em;
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.2);
+  }
+
+  &[disabled] {
+    cursor: default;
+    box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.2) !important;
+    }
+  }
+}
+
+a {
+  text-decoration: underline;
+  color: inherit;
+}
+
+a:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
