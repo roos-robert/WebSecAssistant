@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "homepage_url": "http://localhost:8080/",
+  "homepage_url": "https://github.com/rr222cy/WebSecAssistant",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "permissions": [
