@@ -19,6 +19,8 @@
 import Tooltip from "../components/Tooltip.vue";
 import PopupWrapper from "./PopupWrapper.vue";
 
+import { DEFAULT_OPTIONS } from '../options';
+
 // TODO: Move this to backend or options?
 const WEBMAIL_URLS = [
   "https://webmail.simply.com",
@@ -36,7 +38,9 @@ export default {
     activeInput: null,
   }),
  async mounted() {
-    const options = await browser.storage.local.get(['phishingPopupEnabled', 'passwordTooltipEnabled']);
+    let options = { ...DEFAULT_OPTIONS };
+    await browser.storage.local.get(['phishingPopupEnabled', 'passwordTooltipEnabled'])
+      .then(optionsInStorage => Object.assign(options, optionsInStorage));
 
     if (options.phishingPopupEnabled && WEBMAIL_URLS.some(webmailUrl => window.location.href.startsWith(webmailUrl))) {
       this.popupInitialView = 'phishing';
