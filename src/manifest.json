@@ -14,10 +14,12 @@
     "*://*/*"
   ],
   "icons": {
-    "16": "icon.svg",
-    "48": "icon.svg",
-    "96": "icon.svg",
-    "128": "icon.svg"
+    "16": "icons/icon16.png",
+    "24": "icons/icon24.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png"
   },
   "background": {
     "scripts": [
@@ -35,12 +37,16 @@
     "default_popup": "popup.html",
     "default_title": "__MSG_extName__",
     "default_icon": {
-      "19": "icon.svg",
-      "38": "icon.svg"
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png"
     }
   },
   "web_accessible_resources": [
+    "audio/*",
     "img/*",
+    "icons/*",
+    "favicon.ico",
     "warning.html",
     "guide.html"
   ],

@@ -5,7 +5,7 @@
         <font-awesome-icon icon="cog" />
       </div>
       <div @click="goHome">
-        <img :src="assetUrl('icon.svg')">
+        <img :src="assetUrl('icons/icon.svg')">
       </div>
       <div @click="$root.$emit('close')">
         <font-awesome-icon icon="times" />
