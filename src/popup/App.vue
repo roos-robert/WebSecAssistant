@@ -5,7 +5,7 @@
         <font-awesome-icon icon="cog" />
       </div>
       <div @click="goHome">
-        <img :src="assetUrl('icons/icon.svg')">
+        <img :src="assetUrl('icons/icon32.png')">
       </div>
       <div @click="$root.$emit('close')">
         <font-awesome-icon icon="times" />
@@ -97,9 +97,8 @@ nav {
     align-items: center;
 
     img {
-      width: 28px;
-      height: 28px;
-      border-radius: 100%;
+      width: 32px;
+      height: 32px;
     }
   }
 }
