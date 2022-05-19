@@ -8,7 +8,7 @@
       :name="name"
       :checked="value"
       :disabled="disabled"
-      @change="$emit('input', $event.target.checked)"
+      @change="$emit('clicked', $event.target.checked)"
     />
     <div
       class="v-toggle_thumb"

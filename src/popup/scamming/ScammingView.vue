@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     openScammingGuide() {
-      browser.runtime.sendMessage({ type: 'openScammingGuide' });
+      browser.runtime.sendMessage({ type: 'openGuide', guide: 'scamming' });
       if (this.$root.$options.popupType === 'browserAction') {
         this.$root.$emit('close');
       }

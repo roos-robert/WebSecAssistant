@@ -5,7 +5,7 @@
         <h1><font-awesome-icon :icon="icon" /> {{ title }}</h1>
       </header>
       <main>
-        <p>{{ $t('warningPage.goingTo') }}<br>{{ params.url }}</p>
+        <p>{{ $t('warningPage.goingTo') }}<br>{{ url }}</p>
         <p>{{ description }}</p>
         <button v-if="categoryInfo && categoryInfo.learnUrl" class="btn-primary" :class="cssClass" @click="openWindow(categoryInfo.learnUrl)"><font-awesome-icon icon="book" /> {{ $t('common.clickHereToLearnMore') }}</button>
         
@@ -26,7 +26,6 @@
 
     <footer>
       <h4>{{ $t('common.pluginName') }}</h4>
-      <!--<p>Debug: {{params}}</p>-->
     </footer>
   </div>
 </template>
@@ -75,7 +74,9 @@ export default {
   name: 'App',
   data() {
     return {
-      params: JSON.parse(Buffer(window.location.hash, 'base64').toString()),
+      url: (new URLSearchParams(window.location.search)).get('url'),
+      blockedBy: (new URLSearchParams(window.location.search)).get('blockedBy'),
+      hostname: null,
       companyInfo: null,
       categoryInfo: null,
       showMoreOptions: false,
@@ -84,13 +85,28 @@ export default {
   },
   async beforeMount() {
     this.companyInfo = (await browser.storage.local.get('companyInfo')).companyInfo;
+    this.hostname = new URL(this.url).hostname;
 
-    if (this.params.blockedBy === 'domain') {
-      const categoryIds = this.companyInfo.filterLists
-        .filter(fl => this.params.filterListIds.includes(fl.id))
-        .map(fl => fl.categoryId);
+    if (this.blockedBy === 'domain') {
+      const blocklist = new Map((await browser.storage.local.get('blocklist')).blocklist);
 
-      this.categoryInfo = getCategoryInfo(worstCategory(categoryIds));
+      // Try the domain from the url + all parent domains
+      const domains = this.hostname.split('.')
+        .map((_, i, arr) => arr.slice(i, arr.length).join('.'));
+
+      for (const domain of domains) {
+        var filterListIds = blocklist.get(domain);
+        if (filterListIds) {
+          this.hostname = domain;
+          const categoryIds = this.companyInfo.filterLists
+            .filter(fl => filterListIds.includes(fl.id))
+            .map(fl => fl.categoryId);
+          this.categoryInfo = getCategoryInfo(worstCategory(categoryIds));
+          break;
+        }
+      }
+
+      // TODO: What to do if domain not found in blocklist?
     }
   },
   methods: {
@@ -104,7 +120,7 @@ export default {
     async tabWhitelistAndGo() {
       await browser.runtime.sendMessage({
         type: 'tabWhitelist',
-        params: this.params,
+        domain: this.hostname,
       });
       this.goUrl();
     },
@@ -123,17 +139,13 @@ export default {
       }
     },
     goUrl() {
-      window.location.href = this.params.url;
+      window.location.href = this.url;
     },
     openWindow(url) {
       window.open(url, '_blank')
     }
   },
   computed: {
-    hostname() {
-      const url = new URL(this.params.url);
-      return url.hostname;
-    },
     cssClass() {
       if (this.categoryInfo) {
         return this.categoryInfo.cssClass;

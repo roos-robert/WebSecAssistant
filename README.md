@@ -9,20 +9,30 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compile and serve for development
+Both manifest versions (concurrently):
 ```
 npm run serve
 ```
+For Firefox (manifest v2):
+```
+npm run serve-v2
+```
+For Chrome (manifest v3):
+```
+npm run watch-v3
+```
 
-### Compiles and minifies for production
+### Compile and minify for production
+Both manifest versions (concurrently):
 ```
 npm run build
 ```
-
-### Lints and fixes files
+For Firefox (manifest v2):
 ```
-npm run lint
+npm run serve-v2
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+For Chrome (manifest v3):
+```
+npm run build-v3
+```

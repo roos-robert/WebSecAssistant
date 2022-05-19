@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     openPhishingGuide() {
-      browser.runtime.sendMessage({ type: 'openPhishingGuide' });
+      browser.runtime.sendMessage({ type: 'openGuide', guide: 'phishing' });
       if (this.$root.$options.popupType === 'browserAction') {
         this.$root.$emit('close');
       }

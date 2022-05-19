@@ -12,30 +12,38 @@
         <div class="section-body">
           <h3>{{ $t('settings.passwordHelp') }}</h3>
           <div class="option">
-            {{ $t('settings.showTooltip') }} <toggle-button v-model="passwordTooltipEnabled" @input="onOptionChange({ 'passwordTooltipEnabled': $event })" />
+            {{ $t('settings.showTooltip') }} <toggle-button :value="passwordTooltipEnabled" @clicked="onOptionChange({ 'passwordTooltipEnabled': $event })" />
           </div>
         </div>
       </section>
       <section>
         <div class="section-body">
           <h3>{{ $t('settings.domainBlocking') }}</h3>
-          <div class="option">
-            {{ $t('settings.blockDomains') }} <toggle-button v-model="domainBlockingEnabled" @input="onOptionChange({ 'domainBlockingEnabled': $event })" />
+          <div v-if="manifestVersion === 'v3'">
+            <i>{{ $t('settings.featureNotAvailable') }}</i>
           </div>
-          <h4>{{ $t('settings.blocklist') }}</h4>
-          <p>{{ $t('settings.lastUpdated') }} {{ blocklistUpdated ? formatDate(blocklistUpdated) : '' }}</p>
-          <button @click="updateBlocklist" :disabled='updatingBlocklist'>{{ updatingBlocklist ? $t('settings.updating') : $t('settings.updateNow') }}</button>
-          <p v-if="blocklistUpdateResult"
-            :style="{ color: blocklistUpdateResult.success ? 'green' : 'red' }">
-            {{ blocklistUpdateResult.success ? $t('settings.updateSucceeded') : $t('settings.updateFailed') + blocklistUpdateResult.error }}
-          </p>
+          <div v-else>
+            <div class="option">
+              {{ $t('settings.blockDomains') }} <toggle-button :value="domainBlockingEnabled" @clicked="onOptionChange({ 'domainBlockingEnabled': $event })" />
+            </div>
+            <h4>{{ $t('settings.blocklist') }}</h4>
+            <p>{{ $t('settings.lastUpdated') }} {{ blocklistUpdated ? formatDate(blocklistUpdated) : '' }}</p>
+            <button @click="updateBlocklist" :disabled='updatingBlocklist'>{{ updatingBlocklist ? $t('settings.updating') : $t('settings.updateNow') }}</button>
+            <p v-if="blocklistUpdateResult"
+              :style="{ color: blocklistUpdateResult.success ? 'green' : 'red' }">
+              {{ blocklistUpdateResult.success ? $t('settings.updateSucceeded') : $t('settings.updateFailed') + blocklistUpdateResult.error }}
+            </p>
+          </div>
         </div>
       </section>
       <section>
         <div class="section-body">
           <h3>{{ $t('settings.externalLinks') }}</h3>
-          <div class="option">
-            {{ $t('settings.warnExternalLinks') }} <toggle-button v-model="externalLinkEnabled" @input="onOptionChange({ 'externalLinkEnabled': $event })" />
+          <div v-if="manifestVersion === 'v3'">
+            <i>{{ $t('settings.featureNotAvailable') }}</i>
+          </div>
+          <div v-else class="option">
+            {{ $t('settings.warnExternalLinks') }} <toggle-button :value="externalLinkEnabled" @clicked="onOptionChange({ 'externalLinkEnabled': $event })" />
           </div>
         </div>
       </section>
@@ -43,7 +51,7 @@
         <div class="section-body">
           <h3>{{ $t('settings.phishingPopup') }}</h3>
           <div class="option">
-            {{ $t('settings.enablePhishingPopup') }} <toggle-button v-model="phishingPopupEnabled" @input="onOptionChange({ 'phishingPopupEnabled': $event })" />
+            {{ $t('settings.enablePhishingPopup') }} <toggle-button :value="phishingPopupEnabled" @clicked="onOptionChange({ 'phishingPopupEnabled': $event })" />
           </div>
         </div>
       </section>
@@ -67,6 +75,7 @@ export default {
       updatingBlocklist: false,
       blocklistUpdated: null,
       blocklistUpdateResult: null,
+      manifestVersion: __MANIFEST_VERSION__,
       ...DEFAULT_OPTIONS,
     };
   },

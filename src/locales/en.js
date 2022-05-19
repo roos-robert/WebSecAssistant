@@ -233,6 +233,8 @@ export default {
     warnExternalLinks: 'Warn when clicking on links outside the browser',
 
     phishingPopup: 'Phishing popup',
-    enablePhishingPopup: 'Show phishing popup when visiting webmail'
+    enablePhishingPopup: 'Show phishing popup when visiting webmail',
+
+    featureNotAvailable: 'This feature is not supported in your browser.'
   },
 }
