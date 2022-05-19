@@ -10,7 +10,7 @@ module.exports = (env) => {
     plugins: [
       new ZipPlugin({
         path: '../artifacts',
-        filename: `websec-assistant-v${pkg.version}-m${manifest}-production.zip`,
+        filename: `websec-coach-v${pkg.version}-m${manifest}-production.zip`,
       })
     ]
   });

@@ -1,6 +1,6 @@
 export default {
   common: {
-    pluginName: 'WebSec Assistant',
+    pluginName: 'WebSec Coach',
     back: 'Tillbaka',
     clickHereToLearnMore: 'Klicka här för att lära dig mer!',
   },

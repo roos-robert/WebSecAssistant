@@ -1,4 +1,4 @@
-# WebSec Assistant
+# WebSec Coach
 
 ## Build requirements
 * NodeJS v16.11.1+
