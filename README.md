@@ -20,7 +20,7 @@ npm run serve-v2
 ```
 For Chrome (manifest v3):
 ```
-npm run watch-v3
+npm run serve-v3
 ```
 
 ### Compile and minify for production
@@ -30,7 +30,7 @@ npm run build
 ```
 For Firefox (manifest v2):
 ```
-npm run serve-v2
+npm run build-v2
 ```
 For Chrome (manifest v3):
 ```
