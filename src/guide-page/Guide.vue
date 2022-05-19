@@ -68,7 +68,7 @@ export default {
       required: true,
     },
     icon: {
-      type: Object,
+      type: String,
       required: true,
     },
     steps: {
@@ -141,7 +141,9 @@ export default {
       if (this.audioEnabled) {
         audioPlayer.stop();
         setTimeout(() => {
-          audioPlayer.play(`guides/${this.name}/${this.currentStep}.mp3`);
+          if (this.audioEnabled) {
+            audioPlayer.play(`guides/${this.name}/${this.currentStep}.mp3`);
+          }
         }, 1000);
       }
 

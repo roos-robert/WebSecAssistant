@@ -233,6 +233,8 @@ export default {
     warnExternalLinks: 'Varna vid klick på länkar utifrån',
 
     phishingPopup: 'Nätfiske-popup',
-    enablePhishingPopup: 'Visa popup med information om nätfiske i mailinkorgen'
+    enablePhishingPopup: 'Visa popup med information om nätfiske i mailinkorgen',
+
+    featureNotAvailable: 'Den här funktionen stöds inte i din webbläsare.'
   },
 }

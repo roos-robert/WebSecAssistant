@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     openFakeNewsGuide() {
-      browser.runtime.sendMessage({ type: 'openFakeNewsGuide' });
+      browser.runtime.sendMessage({ type: 'openGuide', guide: 'fake-news' });
       if (this.$root.$options.popupType === 'browserAction') {
         this.$root.$emit('close');
       }

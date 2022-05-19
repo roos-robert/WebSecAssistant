@@ -66,6 +66,7 @@ export default {
       const shadowRoot = this.$root.$options.shadowRoot;
 
       if (
+        target !== undefined &&
         target !== this.activeInput &&
         target !== shadowRoot.host &&
         target.getRootNode() !== shadowRoot
@@ -115,14 +116,11 @@ export default {
 
       if (!guideShown.has(domain) || document.querySelectorAll("input[type=password]").length === 2) {
         guideShown.add(domain);
-        await browser.storage.local.set({ guideShown });
+        await browser.storage.local.set({ guideShown: Array.from(guideShown) });
         //this.showTooltip = true;
         this.popupInitialView = 'password';
         this.showPopup = true;
         this.activeInput = ev.target;
-        if (this.activeInput == ev.target && this.showPopup) {
-          return;
-        }
       }
     },
   },

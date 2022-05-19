@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { format } from 'date-fns';
 
 export function assetUrl(fileName) {
   return browser.runtime.getURL(fileName);
@@ -14,5 +14,5 @@ export function setHasAny(set, needles) {
 }
 
 export function formatDate(value) {
-  return moment(value).format('YYYY-MM-DD HH:mm');
+  return format(value, 'yyyy-MM-dd HH:mm');
 }

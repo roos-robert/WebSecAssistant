@@ -17,7 +17,7 @@ export default {
   name: 'PasswordSummary',
   methods: {
     openPasswordGuide() {
-      browser.runtime.sendMessage({ type: 'openPasswordGuide' });
+      browser.runtime.sendMessage({ type: 'openGuide', guide: 'password' });
       if (this.$root.$options.popupType === 'browserAction') {
         this.$root.$emit('close');
       }
