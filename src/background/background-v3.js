@@ -1,12 +1,12 @@
 // THIS IS A SERVICE WORKER, DON'T USE GLOBALS
 
-/*import { getOptions } from '../options';
+import { getOptions } from '../options';
 
-import { updateCompanyAndFilterLists } from './shared';*/
+import { updateCompanyAndFilterLists } from './shared';
 
 // Set up message handlers
 browser.runtime.onMessage.addListener(async (request, sender) => {
-  /*if (request.type === 'tabWhitelist') {
+  if (request.type === 'tabWhitelist') {
     await tabWhitelist(request.domain, sender.tab.id);
     return { success: true };
   }
@@ -23,7 +23,7 @@ browser.runtime.onMessage.addListener(async (request, sender) => {
       return { success: false, error: e.toString() };
     }
     return { success: true };
-  }*/
+  }
 
   if (request.type === 'openGuide') {
     browser.tabs.create({
@@ -32,7 +32,7 @@ browser.runtime.onMessage.addListener(async (request, sender) => {
     });
   }
 });
-/*
+
 // Update blocklist on extension install
 browser.runtime.onInstalled.addListener(
   () => {
@@ -134,12 +134,27 @@ async function updateSessionRules() {
             // TODO: Regex substitution not url encoded???
             // Possible solution: Use hash instead of query params, for example #domain|https://example.com?param1=232&param2=535j
             //  But what if the original url contains a hash?
+
+            //  >>> THIS SOLUTION MAYBE:
+            //    Divide url into two parts, url and fragment. Put these in the fragment for the warning page, with a delimiter to separate them
+            //    What delimiter to use? Something that can't be in a URL, but is allowed in the fragment?
+
             // Can we do any regex magic? https://github.com/google/re2/wiki/Syntax
             // Transform?
+
+            // Chrome doesn't seem to support URL-encoding the substitution
+            // We have to pass the URL parts in separate safe ways
             regexSubstitution: browser.runtime.getURL('warning.html') + '?blockedBy=domain&url=\\0',
           }
         },
         condition: {
+          // Url parts could be divided into groups using regex
+          //  1. protocol
+          //  2. domain
+          //  3. port
+          //  4. path
+          //  5. query string
+          //  6. fragment
           regexFilter: '.+',
           resourceTypes: ['main_frame'],
           requestDomains: blocklist.map(b => b[0]),
@@ -154,4 +169,3 @@ async function updateBlocklist() {
   await updateCompanyAndFilterLists();
   await updateSessionRules();
 }
-*/

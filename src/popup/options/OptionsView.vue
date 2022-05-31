@@ -19,21 +19,16 @@
       <section>
         <div class="section-body">
           <h3>{{ $t('settings.domainBlocking') }}</h3>
-          <div v-if="manifestVersion === 'v3'">
-            <i>{{ $t('settings.featureNotAvailable') }}</i>
+          <div class="option">
+            {{ $t('settings.blockDomains') }} <toggle-button :value="domainBlockingEnabled" @clicked="onOptionChange({ 'domainBlockingEnabled': $event })" />
           </div>
-          <div v-else>
-            <div class="option">
-              {{ $t('settings.blockDomains') }} <toggle-button :value="domainBlockingEnabled" @clicked="onOptionChange({ 'domainBlockingEnabled': $event })" />
-            </div>
-            <h4>{{ $t('settings.blocklist') }}</h4>
-            <p>{{ $t('settings.lastUpdated') }} {{ blocklistUpdated ? formatDate(blocklistUpdated) : '' }}</p>
-            <button @click="updateBlocklist" :disabled='updatingBlocklist'>{{ updatingBlocklist ? $t('settings.updating') : $t('settings.updateNow') }}</button>
-            <p v-if="blocklistUpdateResult"
-              :style="{ color: blocklistUpdateResult.success ? 'green' : 'red' }">
-              {{ blocklistUpdateResult.success ? $t('settings.updateSucceeded') : $t('settings.updateFailed') + blocklistUpdateResult.error }}
-            </p>
-          </div>
+          <h4>{{ $t('settings.blocklist') }}</h4>
+          <p>{{ $t('settings.lastUpdated') }} {{ blocklistUpdated ? formatDate(blocklistUpdated) : '' }}</p>
+          <button @click="updateBlocklist" :disabled='updatingBlocklist'>{{ updatingBlocklist ? $t('settings.updating') : $t('settings.updateNow') }}</button>
+          <p v-if="blocklistUpdateResult"
+            :style="{ color: blocklistUpdateResult.success ? 'green' : 'red' }">
+            {{ blocklistUpdateResult.success ? $t('settings.updateSucceeded') : $t('settings.updateFailed') + blocklistUpdateResult.error }}
+          </p>
         </div>
       </section>
       <section>
