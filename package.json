@@ -1,6 +1,6 @@
 {
   "name": "websec-coach",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "scripts": {
     "serve": "concurrently \"npm:serve-v2\" \"npm:serve-v3\"",
