@@ -79,7 +79,7 @@ function genManifest(manifestVersion) {
 
     ...(v3 && {
       permissions: [
-        //"declarativeNetRequestWithHostAccess",
+        "declarativeNetRequestWithHostAccess",
         ...shared_permissions
       ],
       host_permissions,
