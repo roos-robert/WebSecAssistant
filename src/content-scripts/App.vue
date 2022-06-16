@@ -24,7 +24,7 @@ import { DEFAULT_OPTIONS } from '../options';
 // TODO: Move this to backend or options?
 const WEBMAIL_URLS = [
   "https://webmail.simply.com",
-  "https://mail.company.com/webmail",
+  "https://outlook.live.com/mail",
   "https://mail.google.com/mail"
 ];
 
